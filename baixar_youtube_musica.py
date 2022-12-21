@@ -55,7 +55,7 @@ if __name__ == '__main__':
             """Choose which one to download:
     1 - .mp3
     2 - .mp4 low data consumption (144p)
-    3 - .mp4 low data consumption (360p)
+    3 - .mp4 medium quality (360p)
     4 - .mp4 high quality (720p)
 Response: """
         ))
