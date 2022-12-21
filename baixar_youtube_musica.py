@@ -15,6 +15,7 @@ def download_audio():
     url = ask_to_user()
     audio = extract_audio(url)
 
+    print('Downloading {}.'.format(url.title))
     out_file = audio.download('musicas_python')
 
     base, ext = os.path.splitext(out_file)
@@ -24,12 +25,28 @@ def download_audio():
     print(url.title + ' audio has been sucessfully downloaded')
 
 
-def download_high_quality_video():
-    print('Feature in progress...')
+def download_video(video):
+    print('Downloading {}.'.format(video.title))
+    video.download('videos_python')
+    print(video.title + ' audio has been sucessfully downloaded')
 
 
 def download_low_quality_video():
-    print('Feature in progress...')
+    url = ask_to_user()
+    video = url.streams.get_lowest_resolution()
+    download_video(video)
+
+
+def download_medium_quality_video():
+    url = ask_to_user()
+    video = url.streams.get_by_resolution('360p')
+    download_video(video)
+
+
+def download_high_quality_video():
+    url = ask_to_user()
+    video = url.streams.get_highest_resolution()
+    download_video(video)
 
 
 if __name__ == '__main__':
@@ -37,19 +54,22 @@ if __name__ == '__main__':
         request = int(input(
             """Choose which one to download:
     1 - .mp3
-    2 - .mp4 high quality
-    3 - .mp4 low data consumption
+    2 - .mp4 low data consumption (144p)
+    3 - .mp4 low data consumption (360p)
+    4 - .mp4 high quality (720p)
 Response: """
         ))
 
         if request == 1:
-          download_audio()
+            download_audio()
         elif request == 2:
-          download_high_quality_video()
+            download_low_quality_video()
         elif request == 3:
-          download_low_quality_video()
+            download_medium_quality_video()
+        elif request == 4:
+            download_high_quality_video()
         else:
-          raise ValueError('Invalid request!!!')
+            raise ValueError('Invalid request!!!')
 
     except:
         raise ValueError("Input a valid URL... If the issue persist, try another link.")
