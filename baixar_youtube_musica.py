@@ -3,7 +3,7 @@ import os
 
 
 def ask_to_user():
-    link = str(input("Digite a URL do vídeo que será extraído o áudio: "))
+    link = str(input("Give me a valid URL: "))
     return YouTube(link)
 
 
@@ -16,7 +16,7 @@ def download_audio():
     audio = extract_audio(url)
 
     print('Downloading {}.'.format(url.title))
-    out_file = audio.download('musicas_python')
+    out_file = audio.download('musics_python')
 
     base, ext = os.path.splitext(out_file)
     new_file = base + '.mp3'
@@ -28,7 +28,7 @@ def download_audio():
 def download_video(video):
     print('Downloading {}.'.format(video.title))
     video.download('videos_python')
-    print(video.title + ' audio has been sucessfully downloaded')
+    print(video.title + ' video has been sucessfully downloaded')
 
 
 def download_low_quality_video():
@@ -53,10 +53,10 @@ if __name__ == '__main__':
     try:
         request = int(input(
             """Choose which one to download:
-    1 - .mp3
-    2 - .mp4 low data consumption (144p)
-    3 - .mp4 medium quality (360p)
-    4 - .mp4 high quality (720p)
+    1 - .mp3(audio)
+    2 - .mp4(video) - low data consumption (144p)
+    3 - .mp4(video) - medium quality (360p)
+    4 - .mp4(video) - high quality (720p)
 Response: """
         ))
 
