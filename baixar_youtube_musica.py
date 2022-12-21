@@ -28,7 +28,7 @@ def download_audio():
 def download_video(video):
     print('Downloading {}.'.format(video.title))
     video.download('videos_python')
-    print(video.title + ' video has been successfully downloaded')
+    print(video.title + ' audio has been sucessfully downloaded')
 
 
 def download_low_quality_video():
