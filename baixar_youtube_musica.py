@@ -1,10 +1,11 @@
 from pytube import YouTube
+from pytube.cli import on_progress
 import os
 
 
 def ask_to_user():
     link = str(input("Give me a valid URL: "))
-    return YouTube(link)
+    return YouTube(link, on_progress_callback=on_progress)
 
 
 def extract_audio(url):
@@ -22,13 +23,14 @@ def download_audio():
     new_file = base + '.mp3'
     os.rename(out_file, new_file)
 
-    print(url.title + ' audio has been sucessfully downloaded')
+    print('\n' + url.title + ' audio has been sucessfully downloaded')
 
 
 def download_video(video):
     print('Downloading {}.'.format(video.title))
     video.download('videos_python')
-    print(video.title + ' video has been sucessfully downloaded')
+
+    print('\n' + video.title + ' video has been sucessfully downloaded')
 
 
 def download_low_quality_video():
