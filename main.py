@@ -51,7 +51,7 @@ def download_high_quality_video():
     download_video(video)
 
 
-if __name__ == '__main__':
+def run():
     try:
         request = int(input(
             """Choose which one to download:
@@ -75,3 +75,7 @@ Response: """
 
     except:
         raise ValueError("Input a valid URL... If the issue persist, try another link.")
+
+
+if __name__ == '__main__':
+    run()
