@@ -1,10 +1,11 @@
 from pytube import YouTube
+from pytube.cli import on_progress
 import os
 
 
 def ask_to_user():
     link = str(input("Give me a valid URL: "))
-    return YouTube(link)
+    return YouTube(link, on_progress_callback=on_progress)
 
 
 def extract_audio(url):
@@ -22,13 +23,14 @@ def download_audio():
     new_file = base + '.mp3'
     os.rename(out_file, new_file)
 
-    print(url.title + ' audio has been sucessfully downloaded')
+    print('\n' + url.title + ' audio has been sucessfully downloaded')
 
 
 def download_video(video):
     print('Downloading {}.'.format(video.title))
     video.download('videos_python')
-    print(video.title + ' video has been sucessfully downloaded')
+
+    print('\n' + video.title + ' video has been sucessfully downloaded')
 
 
 def download_low_quality_video():
@@ -47,29 +49,3 @@ def download_high_quality_video():
     url = ask_to_user()
     video = url.streams.get_highest_resolution()
     download_video(video)
-
-
-if __name__ == '__main__':
-    try:
-        request = int(input(
-            """Choose which one to download:
-    1 - .mp3(audio)
-    2 - .mp4(video) - low data consumption (144p)
-    3 - .mp4(video) - medium quality (360p)
-    4 - .mp4(video) - high quality (720p)
-Response: """
-        ))
-
-        if request == 1:
-            download_audio()
-        elif request == 2:
-            download_low_quality_video()
-        elif request == 3:
-            download_medium_quality_video()
-        elif request == 4:
-            download_high_quality_video()
-        else:
-            raise ValueError('Invalid request!!!')
-
-    except:
-        raise ValueError("Input a valid URL... If the issue persist, try another link.")
